@@ -11,11 +11,16 @@ public class PlayerController : MonoBehaviour
 
     Vector2 screenBounds;
 
+    HealthManager myHealth;
+
+    public static PlayerController instance { get; private set; }
 
     // Start is called before the first frame update
     void Awake()
     {
+        instance = this;
         screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
+        myHealth = GetComponent<HealthManager>();
 
     }
 
@@ -40,5 +45,21 @@ public class PlayerController : MonoBehaviour
         view.x = Mathf.Clamp(view.x, -screenBounds.x, screenBounds.x);
         view.y = Mathf.Clamp(view.y, -screenBounds.y, screenBounds.y);
         transform.position = view;
+    }
+
+    public void PlayerTakeDamage(float damageToTake)
+    {
+        myHealth.RemoveHealth(damageToTake);
+        if (myHealth.health == 0)
+        {
+            PlayerDeath();
+        }
+    }
+
+    void PlayerDeath()
+    {
+        GameObject deathExplosion = Instantiate(Resources.Load<GameObject>("Explosion"), transform.position, Quaternion.identity);
+        Destroy(deathExplosion, deathExplosion.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+        Destroy(this.gameObject);
     }
 }
