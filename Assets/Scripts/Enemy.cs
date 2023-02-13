@@ -8,33 +8,38 @@ public class Enemy : MonoBehaviour
     float speed;
     [SerializeField]
     float rotateSpeed;
-    
+
     public float collisionDamage;
-
-    HealthManager myHealth;
-
-    Vector2 currentPosition;
-    Vector2 playerPosition;
+    public float shootDamage;
 
     public float minDistance;
+
+    HealthManager myHealth;
+    [Header("Debug only do not change value")]
+    [SerializeField]
+    Vector2 currentPosition;
+    [SerializeField]
+    Vector2 playerPosition;
+
+
+
+    public enum State { none, chase, shoot };
     // Start is called before the first frame update
     void Awake()
     {
         myHealth = GetComponent<HealthManager>();
+
     }
 
     public virtual void MoveToPlayer()
     {
         float dis = Vector2.Distance(currentPosition, playerPosition);
 
-        if (dis > minDistance)
-            transform.position = Vector2.MoveTowards(currentPosition, playerPosition, speed * Time.deltaTime);
-    }
-
-    public virtual void GetPlayerPosition()
-    {
         currentPosition = transform.position;
         playerPosition = PlayerController.instance.transform.position;
+
+        if (dis > minDistance)
+            transform.position = Vector2.MoveTowards(currentPosition, playerPosition, speed * Time.deltaTime);
     }
 
     public virtual void LookAtPlayer()
@@ -54,7 +59,8 @@ public class Enemy : MonoBehaviour
 
     public virtual void EnemyDeath()
     {
-
+        GameObject deathExplosion = Instantiate(Resources.Load<GameObject>("Explosion"), transform.position, Quaternion.identity);
+        Destroy(deathExplosion, deathExplosion.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
         Destroy(this.gameObject);
     }
 }

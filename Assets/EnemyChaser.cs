@@ -4,13 +4,24 @@ using UnityEngine;
 
 public class EnemyChaser : Enemy
 {
-
-    private void FixedUpdate()
+    [SerializeField]
+    State state;
+    private void Start()
     {
-        LookAtPlayer();
-        GetPlayerPosition();
-        MoveToPlayer();
+        state = State.chase;
+    }
 
+    private void Update()
+    {
+
+        switch (state)
+        {
+
+            case State.chase:
+                LookAtPlayer();
+                MoveToPlayer();
+                break;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -18,14 +29,15 @@ public class EnemyChaser : Enemy
         if (collision.gameObject.tag == "Player")
         {
             PlayerController.instance.PlayerTakeDamage(collisionDamage);
-            EnemyDeath();
+            TakeDamage(10000f);
         }
     }
 
-    public override void EnemyDeath()
+    /*public override void EnemyDeath()
     {
         GameObject deathExplosion = Instantiate(Resources.Load<GameObject>("Explosion"), transform.position, Quaternion.identity);
         Destroy(deathExplosion, deathExplosion.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
         base.EnemyDeath();
-    }
+    }*/
+
 }
