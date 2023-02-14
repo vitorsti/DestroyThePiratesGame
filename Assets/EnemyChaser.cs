@@ -18,8 +18,15 @@ public class EnemyChaser : Enemy
         {
 
             case State.chase:
-                LookAtPlayer();
-                MoveToPlayer();
+                float dis = Vector2.Distance(currentPosition, playerPosition);
+
+                currentPosition = transform.position;
+                playerPosition = PlayerController.instance.transform.position;
+                if (dis > minDistance)
+                {
+                    LookAtPlayer();
+                    MoveToPlayer();
+                }
                 break;
         }
     }
@@ -33,11 +40,5 @@ public class EnemyChaser : Enemy
         }
     }
 
-    /*public override void EnemyDeath()
-    {
-        GameObject deathExplosion = Instantiate(Resources.Load<GameObject>("Explosion"), transform.position, Quaternion.identity);
-        Destroy(deathExplosion, deathExplosion.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-        base.EnemyDeath();
-    }*/
 
 }

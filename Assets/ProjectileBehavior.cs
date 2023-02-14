@@ -12,7 +12,7 @@ public class ProjectileBehavior : MonoBehaviour
     PlayerController player;
 
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         player = PlayerController.instance;
 
@@ -56,6 +56,8 @@ public class ProjectileBehavior : MonoBehaviour
             case EnemyType.player:
                 if (other.gameObject.tag == "Player")
                 {
+                    GameObject explosion = Instantiate(Resources.Load<GameObject>("Explosion"), transform.position, Quaternion.identity);
+                    Destroy(explosion, explosion.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
                     other.GetComponent<PlayerController>().PlayerTakeDamage(damage);
                     Destroy(this.gameObject);
                 }
@@ -64,10 +66,12 @@ public class ProjectileBehavior : MonoBehaviour
             case EnemyType.pirateEnemy:
                 if (other.gameObject.tag == "Enemy")
                 {
+                    GameObject explosion = Instantiate(Resources.Load<GameObject>("Explosion"), transform.position, Quaternion.identity);
+                    explosion.transform.localScale.Scale(this.gameObject.transform.localScale);
+                    Destroy(explosion, explosion.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
                     other.GetComponent<Enemy>().TakeDamage(damage);
                     Destroy(this.gameObject);
                 }
-
 
                 break;
         }

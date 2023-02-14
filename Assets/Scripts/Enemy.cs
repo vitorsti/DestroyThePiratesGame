@@ -11,16 +11,16 @@ public class Enemy : MonoBehaviour
 
     public float collisionDamage;
     public float shootDamage;
-
+    public float fireRate;
     public float minDistance;
-
+    bool fire = true;
+    public Transform firePositon;
     HealthManager myHealth;
     [Header("Debug only do not change value")]
     [SerializeField]
-    Vector2 currentPosition;
+    public Vector2 currentPosition;
     [SerializeField]
-    Vector2 playerPosition;
-
+    public Vector2 playerPosition;
 
 
     public enum State { none, chase, shoot };
@@ -33,13 +33,8 @@ public class Enemy : MonoBehaviour
 
     public virtual void MoveToPlayer()
     {
-        float dis = Vector2.Distance(currentPosition, playerPosition);
 
-        currentPosition = transform.position;
-        playerPosition = PlayerController.instance.transform.position;
-
-        if (dis > minDistance)
-            transform.position = Vector2.MoveTowards(currentPosition, playerPosition, speed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(currentPosition, playerPosition, speed * Time.deltaTime);
     }
 
     public virtual void LookAtPlayer()
@@ -56,11 +51,31 @@ public class Enemy : MonoBehaviour
         if (myHealth.health == 0)
             EnemyDeath();
     }
+    public virtual void Shoot()
+    {
+        if (fire)
+        {
+            GameObject projectile = Instantiate(Resources.Load<GameObject>("Projectile"), firePositon.position, firePositon.rotation);
+            projectile.GetComponent<ProjectileBehavior>().SetDamage(shootDamage);
+            projectile.GetComponent<ProjectileBehavior>().SetEnemyTypePlayer();
+            projectile.tag = this.tag;
+            fire = false;
+            StartCoroutine(EnableFire());
+        }
 
+        //Debug.Log("firing" + position);
+    }
     public virtual void EnemyDeath()
     {
-        GameObject deathExplosion = Instantiate(Resources.Load<GameObject>("Explosion"), transform.position, Quaternion.identity);
-        Destroy(deathExplosion, deathExplosion.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+        GameObject explosion = Instantiate(Resources.Load<GameObject>("Explosion"), transform.position, Quaternion.identity);
+        Destroy(explosion, explosion.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
         Destroy(this.gameObject);
+    }
+
+    IEnumerator EnableFire()
+    {
+        float nextTimeTofire = 1f / fireRate;
+        yield return new WaitForSeconds(nextTimeTofire);
+        fire = true;
     }
 }

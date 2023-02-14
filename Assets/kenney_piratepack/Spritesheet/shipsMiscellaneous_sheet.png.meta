@@ -141,12 +141,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: white_flag_ship
+      name: white_flag_ship_0
       rect:
         serializedVersion: 2
         x: 408
         y: 399
-        width: 67
+        width: 66
         height: 113
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -254,7 +254,7 @@ TextureImporter:
         width: 12
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -262,6 +262,132 @@ TextureImporter:
       bones: []
       spriteID: d5f6f3f6b8000a04fa51bf70ab59c6f6
       internalID: 1553805403
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cannon
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 74
+        width: 29
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6fe58dcc85c3ec2408601816e5ca5142
+      internalID: 1061942728
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: black_flag_ship_0
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 284
+        width: 66
+        height: 113
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2462f77b0cac37441b8d63c25dddb9e4
+      internalID: -2065233838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_flag_ship_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 207
+        width: 66
+        height: 113
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c7c2f56bb786f846b80f795738eede9
+      internalID: 1867014467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_flag_ship_2
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 399
+        width: 66
+        height: 113
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c3054ca9dfa844145a125d6cedfe2a18
+      internalID: 1300622822
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: black_flag_ship_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 92
+        width: 66
+        height: 113
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 788bc1cae7c5f5147ae4f97da0a30356
+      internalID: -594019068
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: black_flag_ship_2
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 54
+        width: 66
+        height: 113
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 039093be2b910394aaf3602229cb0abe
+      internalID: 775664162
       vertices: []
       indices: 
       edges: []
@@ -280,9 +406,15 @@ TextureImporter:
       explosion_2: 1991825716
       explosion_0: 706578352
       pirate_chaser: -1351389144
+      black_flag_ship_0: -2065233838
+      black_flag_ship_2: 775664162
       explosion_1: 1554226172
       projectile: 1553805403
-      white_flag_ship: -394610417
+      white_flag_ship_0: -394610417
+      white_flag_ship_1: 1867014467
+      black_flag_ship_1: -594019068
+      cannon: 1061942728
+      white_flag_ship_2: 1300622822
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

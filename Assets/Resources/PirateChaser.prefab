@@ -610,10 +610,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4303aea91617607489dd75548a847793, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.5
+  speed: 1
   rotateSpeed: 1
   collisionDamage: 10
   shootDamage: 0
+  fireRate: 0
   minDistance: 0
   currentPosition: {x: 0, y: 0}
   playerPosition: {x: 0, y: 0}

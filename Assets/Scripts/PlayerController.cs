@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
     public Transform firePosition;
     public Transform[] firePositionSides;
     public static PlayerController instance { get; private set; }
+    Rigidbody2D rb;
 
     // Start is called before the first frame update
     void Awake()
@@ -32,7 +33,7 @@ public class PlayerController : MonoBehaviour
         instance = this;
         screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
         myHealth = GetComponent<HealthManager>();
-
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -44,6 +45,7 @@ public class PlayerController : MonoBehaviour
         {
             //move foward
             transform.Translate(transform.up * speed * Time.deltaTime, Space.World);
+
         }
 
         float horizontal;
@@ -98,8 +100,8 @@ public class PlayerController : MonoBehaviour
 
     void PlayerDeath()
     {
-        GameObject deathExplosion = Instantiate(Resources.Load<GameObject>("Explosion"), transform.position, Quaternion.identity);
-        Destroy(deathExplosion, deathExplosion.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+        GameObject explosion = Instantiate(Resources.Load<GameObject>("Explosion"), transform.position, Quaternion.identity);
+        Destroy(explosion, explosion.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
         Destroy(this.gameObject);
     }
 
@@ -114,13 +116,15 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator EnableSingleFire()
     {
-        yield return new WaitForSeconds(singleFireRate);
+        float nextTimeTofire = 1f / singleFireRate;
+        yield return new WaitForSeconds(nextTimeTofire);
         singleFireEnable = true;
     }
 
     IEnumerator EnableMultipleFire()
     {
-        yield return new WaitForSeconds(multipleFireRate);
+        float nextTimeTofire = 1f / multipleFireRate;
+        yield return new WaitForSeconds(nextTimeTofire);
         multipleFireEnable = true;
     }
 }
