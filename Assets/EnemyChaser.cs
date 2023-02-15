@@ -11,7 +11,7 @@ public class EnemyChaser : Enemy
         state = State.chase;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
 
         switch (state)
@@ -19,14 +19,16 @@ public class EnemyChaser : Enemy
 
             case State.chase:
                 float dis = Vector2.Distance(currentPosition, playerPosition);
-
+                float rotationDistance = dis;
                 currentPosition = transform.position;
                 playerPosition = PlayerController.instance.transform.position;
                 if (dis > minDistance)
                 {
-                    LookAtPlayer();
+
                     MoveToPlayer();
+                    LookAtPlayer();
                 }
+               
                 break;
         }
     }

@@ -37,25 +37,27 @@ public class PlayerController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         //Player movement
 
         if (Input.GetKey(KeyCode.W))
         {
             //move foward
-            transform.Translate(transform.up * speed * Time.deltaTime, Space.World);
-
+            //transform.Translate(transform.up * speed * Time.deltaTime, Space.World);
+            rb.AddForce(transform.up * speed * rb.mass * Time.deltaTime, ForceMode2D.Force);
         }
 
         float horizontal;
         horizontal = Input.GetAxis("Horizontal") * rotationSpeed;
         horizontal *= Time.deltaTime;
         //rotate
-        transform.Rotate(0, 0, -horizontal, Space.World);
-
-        //
-
+        //transform.Rotate(0, 0, -horizontal, Space.World);
+        rb.AddTorque(-horizontal, ForceMode2D.Force);
+        
+    }
+    private void Update()
+    {
         //Fire projectile front
         if (Input.GetMouseButtonDown(0) && singleFireEnable)
         {
@@ -78,15 +80,12 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-
     private void LateUpdate()
     {
         Vector3 view = transform.position;
         view.x = Mathf.Clamp(view.x, -screenBounds.x, screenBounds.x);
         view.y = Mathf.Clamp(view.y, -screenBounds.y, screenBounds.y);
         transform.position = view;
-
-
     }
 
     public void PlayerTakeDamage(float damageToTake)
@@ -96,6 +95,7 @@ public class PlayerController : MonoBehaviour
         {
             PlayerDeath();
         }
+
     }
 
     void PlayerDeath()
@@ -113,7 +113,6 @@ public class PlayerController : MonoBehaviour
         projectile.tag = this.tag;
         Debug.Log("firing" + position);
     }
-
     IEnumerator EnableSingleFire()
     {
         float nextTimeTofire = 1f / singleFireRate;

@@ -38,6 +38,8 @@ public class HealthManager : MonoBehaviour
 
         healthShow = health;
         SetUi();
+        float healthPercentage = (health / maxHealth) * 100;
+        Debug.Log(this.gameObject.name + " " + healthPercentage);
     }
 
     void SetUi()

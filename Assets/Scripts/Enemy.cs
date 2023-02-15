@@ -13,6 +13,7 @@ public class Enemy : MonoBehaviour
     public float shootDamage;
     public float fireRate;
     public float minDistance;
+
     bool fire = true;
     public Transform firePositon;
     HealthManager myHealth;
@@ -21,28 +22,41 @@ public class Enemy : MonoBehaviour
     public Vector2 currentPosition;
     [SerializeField]
     public Vector2 playerPosition;
-
+    Rigidbody2D rb;
 
     public enum State { none, chase, shoot };
     // Start is called before the first frame update
     void Awake()
     {
         myHealth = GetComponent<HealthManager>();
-
+        rb = GetComponent<Rigidbody2D>();
     }
 
     public virtual void MoveToPlayer()
     {
 
-        transform.position = Vector2.MoveTowards(currentPosition, playerPosition, speed * Time.deltaTime);
+        Vector2 direction = (playerPosition - currentPosition).normalized;
+        //direction.Normalize();
+        rb.AddForce(direction * speed * Time.deltaTime, ForceMode2D.Force);
+        //transform.position = Vector2.MoveTowards(currentPosition, playerPosition, speed * Time.deltaTime);
     }
 
     public virtual void LookAtPlayer()
     {
-        Vector2 direction = (playerPosition - (Vector2)transform.position).normalized;
-        var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        var offset = 90;
-        transform.rotation = Quaternion.Euler(Vector3.forward * rotateSpeed * (angle + offset));
+        /*Vector2 direction = (playerPosition - currentPosition).normalized;
+
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 90f;
+        
+        rb.rotation = angle;*/
+
+        Vector3 direction = playerPosition - currentPosition;
+        direction.Normalize();
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        float targetRotation = angle - 90;
+
+        rb.rotation = Mathf.Lerp(rb.rotation, targetRotation, rotateSpeed * Time.deltaTime);
+
+
     }
     public void TakeDamage(float damageToTake)
     {

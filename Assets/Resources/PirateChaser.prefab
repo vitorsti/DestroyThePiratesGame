@@ -189,7 +189,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.006, y: 0.23}
+  m_AnchoredPosition: {x: 0.005, y: -0.239}
   m_SizeDelta: {x: 1, y: 0.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &949259659
@@ -575,7 +575,7 @@ SpriteRenderer:
   m_Sprite: {fileID: -1351389144, guid: 50bea6cda12c2154da6cbb9b65e0dd1a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
-  m_FlipY: 0
+  m_FlipY: 1
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
@@ -610,12 +610,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4303aea91617607489dd75548a847793, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
-  rotateSpeed: 1
+  speed: 18
+  rotateSpeed: 2
   collisionDamage: 10
   shootDamage: 0
   fireRate: 0
   minDistance: 0
+  firePositon: {fileID: 0}
   currentPosition: {x: 0, y: 0}
   playerPosition: {x: 0, y: 0}
   state: 0
@@ -648,8 +649,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_LinearDrag: 1
+  m_AngularDrag: 1
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
