@@ -41,7 +41,11 @@ public class HealthManager : MonoBehaviour
         float healthPercentage = (health / maxHealth) * 100;
         Debug.Log(this.gameObject.name + " " + healthPercentage);
     }
-
+    public void ResetHealth()
+    {
+        health = maxHealth;
+        SetUi();
+    }
     void SetUi()
     {
         if (healthBar != null)

@@ -83,7 +83,11 @@ public class Enemy : MonoBehaviour
     {
         GameObject explosion = Instantiate(Resources.Load<GameObject>("Explosion"), transform.position, Quaternion.identity);
         Destroy(explosion, explosion.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-        Destroy(this.gameObject);
+
+        EnemySpawner.instance.DisableEnemie(this.gameObject);
+        myHealth.ResetHealth();
+
+        //Destroy(this.gameObject);
     }
 
     IEnumerator EnableFire()

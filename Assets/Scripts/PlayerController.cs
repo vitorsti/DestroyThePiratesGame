@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
         myHealth = GetComponent<HealthManager>();
         rb = GetComponent<Rigidbody2D>();
     }
-
+    
     // Update is called once per frame
     void FixedUpdate()
     {

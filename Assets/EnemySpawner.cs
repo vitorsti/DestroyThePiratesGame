@@ -4,63 +4,115 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public GameObject[] prefabs;
-    public List<GameObject> instaces;
+    public List<GameObject> pool;
+    public List<GameObject> waiting, inAction;
     public Transform minTop, maxTop, minDown, maxDown;
-    public float instancesLimit = 10f;
+    public Transform poolLocation;
+    Vector2 positionToSpawn;
+    public int instancesLimit = 10;
+    public static EnemySpawner instance;
     // Start is called before the first frame update
+    void Awake()
+    {
+        instance = this;
+        instancesLimit = RandomWaveNumber();
+        GetEnemiesFromPool();
+    }
     void Start()
     {
-        InvokeRepeating("SpawnEnemy", 1f, 1f);
+        StartCoroutine(EnableEnemie());
     }
 
-    // Update is called once per frame
-    void Update()
+    void GetEnemiesFromPool()
     {
+        float limit = instancesLimit;
 
+        while (limit > 0)
+        {
+            GameObject instance = pool[Random.Range(0, pool.Count)];
+
+            waiting.Add(instance);
+            pool.Remove(instance);
+            limit--;
+        }
     }
-
-    void SpawnEnemy()
+    int RandomWaveNumber()
     {
-        RemoveNullObject();
-
-        if (CheckLimit())
-            return;
-
+        int i = Random.Range(5, 11);
+        return i;
+    }
+    Vector2 GetLocation()
+    {
+        //float limit
+        Vector2 location = Vector2.zero;
         float topOrdown = Random.value;
-        Debug.Log(topOrdown);
-
-        Vector2 positionToSpawn = Vector2.zero;
 
         if (topOrdown > 0.5f)
         {
-            positionToSpawn = new Vector2(Random.Range(maxTop.position.x, minTop.position.x), maxTop.position.y);
+            location = new Vector2(Random.Range(maxTop.position.x, minTop.position.x), maxTop.position.y);
         }
         else
         {
-            positionToSpawn = new Vector2(Random.Range(maxDown.position.x, minDown.position.x), maxDown.position.y);
+            location = new Vector2(Random.Range(maxDown.position.x, minDown.position.x), maxDown.position.y);
         }
-        transform.position = positionToSpawn;
-        GameObject instance = Instantiate(prefabs[Random.Range(0, prefabs.Length)], transform.position, Quaternion.identity);
-        instaces.Add(instance);
+
+        return location;
     }
 
-    bool CheckLimit()
+    public void DisableEnemie(GameObject enemie)
     {
-        if (instaces.Count == instancesLimit)
-            return true;
-        else
-            return false;
-    }
-    void RemoveNullObject()
-    {
-        for (int i = instaces.Count - 1; i >= 0; i--)
+        Debug.Log("enemie waiting");
+        for (int i = 0; i < inAction.Count; i++)
         {
-            if (instaces[i] == null)
+            if (enemie.name == inAction[i].name)
             {
-                instaces.RemoveAt(i);
-            }
+                inAction[i].GetComponent<Collider2D>().enabled = false;
+                inAction[i].GetComponent<Enemy>().enabled = false;
 
+                inAction[i].transform.position = poolLocation.position;
+                inAction[i].transform.rotation = Quaternion.identity;
+                inAction[i].GetComponent<HealthManager>().ResetHealth();
+
+                inAction.Remove(inAction[i]);
+            }
+        }
+
+        CheckActiveEnemies();
+    }
+
+    void CheckActiveEnemies()
+    {
+        Debug.Log(inAction.Count);
+        if (inAction.Count == 0)
+        {
+            instancesLimit = RandomWaveNumber();
+
+            GetEnemiesFromPool();
+
+            StartCoroutine(EnableEnemie());
         }
     }
+
+    IEnumerator EnableEnemie()
+    {
+        int index = waiting.Count - 1;
+
+        while (index > -1)
+        {
+            Debug.Log(index);
+            yield return new WaitForSeconds(1f);
+            positionToSpawn = Vector2.zero;
+            positionToSpawn = GetLocation();
+            waiting[index].transform.position = positionToSpawn;
+            waiting[index].GetComponent<Collider2D>().enabled = true;
+            waiting[index].GetComponent<Enemy>().enabled = true;
+            inAction.Add(waiting[index]);
+            waiting.Remove(waiting[index]);
+            index--;
+
+        }
+
+        yield return null;
+    }
+
 }
