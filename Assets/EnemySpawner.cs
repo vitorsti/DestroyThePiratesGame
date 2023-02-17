@@ -10,12 +10,14 @@ public class EnemySpawner : MonoBehaviour
     public Transform poolLocation;
     Vector2 positionToSpawn;
     public int instancesLimit = 10;
+    float spawnRate;
     public static EnemySpawner instance;
     // Start is called before the first frame update
     void Awake()
     {
         instance = this;
-        instancesLimit = RandomWaveNumber();
+        //instancesLimit = RandomWaveNumber();
+        spawnRate = PlayerPrefs.GetFloat("SpawnRate", 1.5f);
         GetEnemiesFromPool();
     }
     void Start()
@@ -36,11 +38,9 @@ public class EnemySpawner : MonoBehaviour
             limit--;
         }
     }
-    int RandomWaveNumber()
-    {
-        int i = Random.Range(5, 11);
-        return i;
-    }
+
+
+
     Vector2 GetLocation()
     {
         //float limit
@@ -72,8 +72,9 @@ public class EnemySpawner : MonoBehaviour
                 inAction[i].transform.position = poolLocation.position;
                 inAction[i].transform.rotation = Quaternion.identity;
                 inAction[i].GetComponent<HealthManager>().ResetHealth();
-
+                pool.Add(inAction[i]);
                 inAction.Remove(inAction[i]);
+
             }
         }
 
@@ -85,11 +86,7 @@ public class EnemySpawner : MonoBehaviour
         Debug.Log(inAction.Count);
         if (inAction.Count == 0)
         {
-            instancesLimit = RandomWaveNumber();
-
-            GetEnemiesFromPool();
-
-            StartCoroutine(EnableEnemie());
+            //Round Over
         }
     }
 
@@ -100,7 +97,7 @@ public class EnemySpawner : MonoBehaviour
         while (index > -1)
         {
             Debug.Log(index);
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(spawnRate);
             positionToSpawn = Vector2.zero;
             positionToSpawn = GetLocation();
             waiting[index].transform.position = positionToSpawn;
