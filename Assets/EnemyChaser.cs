@@ -6,6 +6,7 @@ public class EnemyChaser : Enemy
 {
     [SerializeField]
     State state;
+    RaycastHit2D newDirection;
     private void Start()
     {
         state = State.chase;
@@ -19,7 +20,7 @@ public class EnemyChaser : Enemy
 
             case State.chase:
                 float dis = Vector2.Distance(currentPosition, playerPosition);
-                float rotationDistance = dis;
+                //float rotationDistance = dis;
                 currentPosition = transform.position;
                 playerPosition = PlayerController.instance.transform.position;
                 if (dis > minDistance)
@@ -27,9 +28,22 @@ public class EnemyChaser : Enemy
 
                     MoveToPlayer();
                     LookAtPlayer();
+                    if (DetectObstacle())
+                        state = State.stopMove;
                 }
-               
                 break;
+            case State.stopMove:
+                newDirection = GetPositon();
+                Debug.Log(newDirection);
+                //state = State.none;
+                state = State.avoidObstacle;
+                break;
+            case State.avoidObstacle:
+                currentPosition = transform.position;
+                AvoidObstacle(newDirection);
+                //state = State.chase;
+                break;
+
         }
     }
 

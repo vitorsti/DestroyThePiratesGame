@@ -15,6 +15,7 @@ public class EnemyShooter : Enemy
     // Update is called once per frame
     void Update()
     {
+       
         float dis = Vector2.Distance(currentPosition, playerPosition);
 
         currentPosition = transform.position;
@@ -34,6 +35,7 @@ public class EnemyShooter : Enemy
                 {
                     state = State.shoot;
                 }
+
                 break;
             case State.shoot:
                 LookAtPlayer();
@@ -42,5 +44,7 @@ public class EnemyShooter : Enemy
                     state = State.chase;
                 break;
         }
+
+       
     }
 }

@@ -24,7 +24,11 @@ public class Enemy : MonoBehaviour
     public Vector2 playerPosition;
     Rigidbody2D rb;
 
-    public enum State { none, chase, shoot };
+    public Transform raycastPosiotion;
+
+    public float hitDistance;
+
+    public enum State { none, chase, shoot, avoidObstacle, stopMove };
     // Start is called before the first frame update
     void Awake()
     {
@@ -90,6 +94,61 @@ public class Enemy : MonoBehaviour
         //Destroy(this.gameObject);
     }
 
+    public bool DetectObstacle()
+    {
+
+        Debug.DrawRay(raycastPosiotion.position, transform.up * hitDistance, Color.red);
+        RaycastHit2D hit = Physics2D.Raycast(raycastPosiotion.position, transform.up, hitDistance);
+        if (hit.collider != null && hit.transform.tag == "Island")
+        {
+            Debug.Log(hit.transform.gameObject.name);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+    }
+    public virtual void AvoidObstacle(RaycastHit2D position)
+    {
+
+        /*Vector2 rotation = position - currentPosition;
+        float angle = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg + 90f;
+        rb.rotation = angle*Time.deltaTime;*/
+        //Vector2 normal = position.normal;
+        ///Vector2 direction = Vector2.Reflect(transform.right, normal);
+
+        // Rotate the enemy to face the new direction
+        /*float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);*/
+
+       //Vector3 directionRotation = direction - currentPosition;
+        //direction.Normalize();
+        //float angle = Mathf.Atan2(directionRotation.y, directionRotation.x) * Mathf.Rad2Deg;
+        //float targetRotation = angle - 90;
+
+       // rb.rotation = Mathf.Lerp(rb.rotation, targetRotation, rotateSpeed * Time.deltaTime);
+
+        // Move the enemy in the new direction
+        //rb.velocity = direction * 0.1f;
+
+
+    }
+
+    public RaycastHit2D GetPositon()
+    {
+        rb.velocity = Vector2.zero;
+        rb.angularVelocity = 0f;
+
+        Debug.DrawRay(raycastPosiotion.position, transform.up * hitDistance, Color.red);
+        RaycastHit2D hit = Physics2D.Raycast(raycastPosiotion.position, transform.up, hitDistance);
+
+        //Vector2 normal = hit.normal;
+        //Vector2 direction = Vector2.Reflect(transform.right, normal);
+        //Debug.DrawRay(normal, direction * hitDistance, Color.red);
+        return hit;
+    }
     IEnumerator EnableFire()
     {
         float nextTimeTofire = 1f / fireRate;
