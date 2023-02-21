@@ -162,7 +162,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pirate_chaser
+      name: pirate_chaser_0
       rect:
         serializedVersion: 2
         x: 606
@@ -317,7 +317,7 @@ TextureImporter:
         width: 66
         height: 113
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -338,7 +338,7 @@ TextureImporter:
         width: 66
         height: 113
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -359,7 +359,7 @@ TextureImporter:
         width: 66
         height: 113
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -380,7 +380,7 @@ TextureImporter:
         width: 66
         height: 113
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -388,6 +388,90 @@ TextureImporter:
       bones: []
       spriteID: 039093be2b910394aaf3602229cb0abe
       internalID: 775664162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: white_flag_ship_3
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 169
+        width: 66
+        height: 113
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d42e8446df6ecbf40a84ac4587d7fd13
+      internalID: 2082755244
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: black_flag_ship_3
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 399
+        width: 66
+        height: 113
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05004013b651f734b9ae03a839c43a0b
+      internalID: -482963385
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pirate_chaser_1
+      rect:
+        serializedVersion: 2
+        x: 610
+        y: 48
+        width: 20
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0acdb16801a835f498eac5bcaddedc1a
+      internalID: 309351935
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pirate_chaser_2
+      rect:
+        serializedVersion: 2
+        x: 588
+        y: 48
+        width: 20
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c331cd324e189e14da2175b9d6b53bfa
+      internalID: 909698508
       vertices: []
       indices: 
       edges: []
@@ -405,15 +489,19 @@ TextureImporter:
     nameFileIdTable:
       explosion_2: 1991825716
       explosion_0: 706578352
-      pirate_chaser: -1351389144
       black_flag_ship_0: -2065233838
+      pirate_chaser_1: 309351935
       black_flag_ship_2: 775664162
       explosion_1: 1554226172
       projectile: 1553805403
+      white_flag_ship_3: 2082755244
+      pirate_chaser_2: 909698508
+      pirate_chaser_0: -1351389144
       white_flag_ship_0: -394610417
       white_flag_ship_1: 1867014467
       black_flag_ship_1: -594019068
       cannon: 1061942728
+      black_flag_ship_3: -482963385
       white_flag_ship_2: 1300622822
   spritePackingTag: 
   pSDRemoveMatte: 0

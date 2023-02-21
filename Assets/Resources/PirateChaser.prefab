@@ -507,7 +507,7 @@ GameObject:
   - component: {fileID: 119396266524702537}
   - component: {fileID: 119396266524702536}
   - component: {fileID: 119396266524702534}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PirateChaser
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -547,6 +547,10 @@ MonoBehaviour:
   healthBar: {fileID: 998213712}
   maxHealth: 20
   healthShow: 0
+  damageAmount: 0
+  takeDamage: 0
+  healAmount: 0
+  giveHealth: 0
 --- !u!114 &119396266524702537
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -569,7 +573,7 @@ MonoBehaviour:
   currentPosition: {x: 0, y: 0}
   playerPosition: {x: 0, y: 0}
   raycastPosiotion: {fileID: 5392649768317732485}
-  hitDistance: 2
+  hitDistance: 1
   state: 0
 --- !u!70 &119396266524702536
 CapsuleCollider2D:
@@ -649,6 +653,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1049933494952352457}
   - component: {fileID: 7271251374485106566}
+  - component: {fileID: 3219164406928965762}
+  - component: {fileID: 9058970452063979730}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -723,3 +729,36 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &3219164406928965762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8668893466482750128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54743915283946741bdef0c9675ab3ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthManager: {fileID: 0}
+--- !u!95 &9058970452063979730
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8668893466482750128}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1d8dd609a4d38fa4b8a68442dcefb31c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0

@@ -5,8 +5,8 @@ using UnityEngine;
 public class EnemyChaser : Enemy
 {
     [SerializeField]
-    State state;
-    RaycastHit2D newDirection;
+    //State state;
+
     private void Start()
     {
         state = State.chase;
@@ -33,15 +33,15 @@ public class EnemyChaser : Enemy
                 }
                 break;
             case State.stopMove:
-                newDirection = GetPositon();
-                Debug.Log(newDirection);
+                //newDirection = GetPositon();
+                //Debug.Log(newDirection);
                 //state = State.none;
                 state = State.avoidObstacle;
                 break;
             case State.avoidObstacle:
                 currentPosition = transform.position;
-                AvoidObstacle(newDirection);
-                //state = State.chase;
+                AvoidObstacle();
+                //state = State.none;
                 break;
 
         }

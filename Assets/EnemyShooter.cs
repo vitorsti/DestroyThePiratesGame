@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyShooter : Enemy
 {
     [SerializeField]
-    State state;
+    //State state;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,7 +29,8 @@ public class EnemyShooter : Enemy
                 {
                     LookAtPlayer();
                     MoveToPlayer();
-
+                    if (DetectObstacle())
+                        state = State.stopMove;
                 }
                 else
                 {
@@ -42,6 +43,17 @@ public class EnemyShooter : Enemy
                 Shoot();
                 if (dis > minDistance)
                     state = State.chase;
+                break;
+            case State.stopMove:
+                //newDirection = GetPositon();
+                //Debug.Log(newDirection);
+                //state = State.none;
+                state = State.avoidObstacle;
+                break;
+            case State.avoidObstacle:
+                //currentPosition = transform.position;
+                AvoidObstacle();
+                //state = State.chase;
                 break;
         }
 

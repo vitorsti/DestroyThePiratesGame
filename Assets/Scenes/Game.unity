@@ -753,11 +753,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6042594644636128740, guid: b9fb021f6b0136f47972d7abd45f22ee, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -32.3
+      value: -16.8
       objectReference: {fileID: 0}
     - target: {fileID: 6042594644636128740, guid: b9fb021f6b0136f47972d7abd45f22ee, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.3
+      value: 1.63
       objectReference: {fileID: 0}
     - target: {fileID: 6042594644636128740, guid: b9fb021f6b0136f47972d7abd45f22ee, type: 3}
       propertyPath: m_LocalPosition.z
@@ -790,6 +790,18 @@ PrefabInstance:
     - target: {fileID: 6042594644636128740, guid: b9fb021f6b0136f47972d7abd45f22ee, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6042594644636128742, guid: b9fb021f6b0136f47972d7abd45f22ee, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6042594644636128745, guid: b9fb021f6b0136f47972d7abd45f22ee, type: 3}
+      propertyPath: maxHealth
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 6042594644636128747, guid: b9fb021f6b0136f47972d7abd45f22ee, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9fb021f6b0136f47972d7abd45f22ee, type: 3}
@@ -1086,7 +1098,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: -2
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -8779,6 +8791,8 @@ GameObject:
   m_Component:
   - component: {fileID: 571662922}
   - component: {fileID: 571662923}
+  - component: {fileID: 571662925}
+  - component: {fileID: 571662924}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -8853,6 +8867,39 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &571662924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 571662921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54743915283946741bdef0c9675ab3ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthManager: {fileID: 0}
+--- !u!95 &571662925
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 571662921}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: cfebb0375c649b24ca7cc7bbcad2bb3d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1001 &576878039
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8977,6 +9024,18 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1161541276, guid: 67f2f6898e93b99419f52d0fd4fcb600, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1161541276, guid: 67f2f6898e93b99419f52d0fd4fcb600, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1161541276, guid: 67f2f6898e93b99419f52d0fd4fcb600, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 119396266524702536, guid: 67f2f6898e93b99419f52d0fd4fcb600, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -8985,21 +9044,17 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 119396266524702537, guid: 67f2f6898e93b99419f52d0fd4fcb600, type: 3}
-      propertyPath: hitDistance
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 119396266524702538, guid: 67f2f6898e93b99419f52d0fd4fcb600, type: 3}
       propertyPath: m_RootOrder
       value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 119396266524702538, guid: 67f2f6898e93b99419f52d0fd4fcb600, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -16.48
+      value: -16.334
       objectReference: {fileID: 0}
     - target: {fileID: 119396266524702538, guid: 67f2f6898e93b99419f52d0fd4fcb600, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.44
+      value: 0.465
       objectReference: {fileID: 0}
     - target: {fileID: 119396266524702538, guid: 67f2f6898e93b99419f52d0fd4fcb600, type: 3}
       propertyPath: m_LocalPosition.z
@@ -9036,6 +9091,10 @@ PrefabInstance:
     - target: {fileID: 119396266524702540, guid: 67f2f6898e93b99419f52d0fd4fcb600, type: 3}
       propertyPath: m_Name
       value: PirateChaserTest
+      objectReference: {fileID: 0}
+    - target: {fileID: 119396266524702540, guid: 67f2f6898e93b99419f52d0fd4fcb600, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 67f2f6898e93b99419f52d0fd4fcb600, type: 3}
@@ -9578,7 +9637,7 @@ GameObject:
   - component: {fileID: 1084894243}
   - component: {fileID: 1084894242}
   - component: {fileID: 1084894244}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: island
   m_TagString: Island
   m_Icon: {fileID: 0}
@@ -9640,7 +9699,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -11069,8 +11128,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBar: {fileID: 737318665}
-  maxHealth: 1000
+  maxHealth: 100
   healthShow: 0
+  damageAmount: 0
+  takeDamage: 0
+  healAmount: 0
+  giveHealth: 0
 --- !u!1 &1116745719
 GameObject:
   m_ObjectHideFlags: 0

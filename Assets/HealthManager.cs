@@ -9,6 +9,30 @@ public class HealthManager : MonoBehaviour
     public float health { get; private set; }
     [SerializeField]
     float maxHealth, healthShow;
+    [Header("----- Debug -----")]
+    [SerializeField]
+    private float damageAmount;
+    [SerializeField]
+    private bool takeDamage;
+    [SerializeField]
+    private float healAmount;
+    [SerializeField]
+    private bool giveHealth;
+
+    private void OnValidate()
+    {
+        if (takeDamage)
+        {
+            RemoveHealth(damageAmount);
+            takeDamage = false;
+        }
+
+        if (giveHealth)
+        {
+            AddHealth(healAmount);
+            giveHealth = false;
+        }
+    }
 
     private void Awake()
     {
@@ -34,7 +58,7 @@ public class HealthManager : MonoBehaviour
         health -= amount;
 
         if (health <= 0)
-            health = 0;
+            health = -1;
 
         healthShow = health;
         SetUi();

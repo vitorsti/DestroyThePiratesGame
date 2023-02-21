@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
         myHealth = GetComponent<HealthManager>();
         rb = GetComponent<Rigidbody2D>();
     }
-    
+
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
         //rotate
         //transform.Rotate(0, 0, -horizontal, Space.World);
         rb.AddTorque(-horizontal, ForceMode2D.Force);
-        
+
     }
     private void Update()
     {
@@ -91,7 +91,7 @@ public class PlayerController : MonoBehaviour
     public void PlayerTakeDamage(float damageToTake)
     {
         myHealth.RemoveHealth(damageToTake);
-        if (myHealth.health == 0)
+        if (myHealth.health <= 0)
         {
             PlayerDeath();
         }
@@ -102,7 +102,7 @@ public class PlayerController : MonoBehaviour
     {
         GameObject explosion = Instantiate(Resources.Load<GameObject>("Explosion"), transform.position, Quaternion.identity);
         Destroy(explosion, explosion.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-        Destroy(this.gameObject);
+        Destroy(this.gameObject, 1f);
     }
 
     void Fire(Transform position)
