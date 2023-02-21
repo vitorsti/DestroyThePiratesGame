@@ -443,7 +443,7 @@ TextureImporter:
         width: 20
         height: 38
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -464,7 +464,7 @@ TextureImporter:
         width: 20
         height: 38
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -472,6 +472,48 @@ TextureImporter:
       bones: []
       spriteID: c331cd324e189e14da2175b9d6b53bfa
       internalID: 909698508
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_0
+      rect:
+        serializedVersion: 2
+        x: 614
+        y: 7
+        width: 18
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4c65ffedccd7b84684a766d500fb80b
+      internalID: 1148821146
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_1
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 485
+        width: 11
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6503b7bac25faee43be1b4463655a1d5
+      internalID: 1475396806
       vertices: []
       indices: 
       edges: []
@@ -496,8 +538,10 @@ TextureImporter:
       projectile: 1553805403
       white_flag_ship_3: 2082755244
       pirate_chaser_2: 909698508
+      fire_0: 1148821146
       pirate_chaser_0: -1351389144
       white_flag_ship_0: -394610417
+      fire_1: 1475396806
       white_flag_ship_1: 1867014467
       black_flag_ship_1: -594019068
       cannon: 1061942728

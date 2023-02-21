@@ -30,7 +30,29 @@ public class Enemy : MonoBehaviour
     LayerMask mask;
     public enum State { none, chase, shoot, avoidObstacle, stopMove };
     public State state;
+    [Header("----- Debug -----")]
+    [SerializeField]
+    bool triggerDeath;
+    [SerializeField]
+    float damageToDeal;
+    [SerializeField]
+    bool dealDamage;
     // Start is called before the first frame update
+    private void OnValidate()
+    {
+        if (triggerDeath)
+        {
+            triggerDeath = false;
+            EnemyDeath();
+
+        }
+
+        if (dealDamage)
+        {
+            dealDamage = false;
+            TakeDamage(damageToDeal);
+        }
+    }
     void Awake()
     {
         myHealth = GetComponent<HealthManager>();
@@ -69,8 +91,12 @@ public class Enemy : MonoBehaviour
     {
         myHealth.RemoveHealth(damageToTake);
 
-        if (myHealth.health == 0)
-            EnemyDeath();
+        if (myHealth.health <= 0)
+        {
+            GameObject fire = Instantiate(Resources.Load<GameObject>("FireAnimation"), transform.position, transform.rotation, transform);
+            Destroy(fire, 1f);
+            StartCoroutine(WaitForDeath());
+        }
     }
     public virtual void Shoot()
     {
@@ -88,15 +114,17 @@ public class Enemy : MonoBehaviour
     }
     public virtual void EnemyDeath()
     {
-        GameObject explosion = Instantiate(Resources.Load<GameObject>("Explosion"), transform.position, Quaternion.identity);
-        Destroy(explosion, explosion.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
 
         EnemySpawner.instance.DisableEnemie(this.gameObject);
         myHealth.ResetHealth();
 
         //Destroy(this.gameObject);
     }
-
+    IEnumerator WaitForDeath()
+    {
+        yield return new WaitForSeconds(1f);
+        EnemyDeath();
+    }
     public bool DetectObstacle()
     {
 
@@ -206,7 +234,7 @@ public class Enemy : MonoBehaviour
             Debug.Log(tangentDirection);
             rb.velocity = tangentDirection * speed * Time.deltaTime;
 
-            
+
         }
         else
         {

@@ -28,8 +28,8 @@ public class EnemyChaser : Enemy
 
                     MoveToPlayer();
                     LookAtPlayer();
-                    if (DetectObstacle())
-                        state = State.stopMove;
+                   /*if (DetectObstacle())
+                        state = State.stopMove;*/
                 }
                 break;
             case State.stopMove:

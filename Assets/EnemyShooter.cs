@@ -29,8 +29,8 @@ public class EnemyShooter : Enemy
                 {
                     LookAtPlayer();
                     MoveToPlayer();
-                    if (DetectObstacle())
-                        state = State.stopMove;
+                    /*if (DetectObstacle())
+                        state = State.stopMove;*/
                 }
                 else
                 {

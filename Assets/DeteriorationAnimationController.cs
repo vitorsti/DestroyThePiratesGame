@@ -6,7 +6,7 @@ public class DeteriorationAnimationController : MonoBehaviour
 {
     Animator animator;
     public HealthManager healthManager;
-    float healthController = 100;
+    //float healthController = 100;
     // Start is called before the first frame update
     void Awake()
     {

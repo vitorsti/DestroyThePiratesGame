@@ -93,6 +93,8 @@ public class PlayerController : MonoBehaviour
         myHealth.RemoveHealth(damageToTake);
         if (myHealth.health <= 0)
         {
+            GameObject fire = Instantiate(Resources.Load<GameObject>("FireAnimation"), transform.position, transform.rotation, transform);
+            Destroy(fire, 1f);
             PlayerDeath();
         }
 
@@ -100,9 +102,8 @@ public class PlayerController : MonoBehaviour
 
     void PlayerDeath()
     {
-        GameObject explosion = Instantiate(Resources.Load<GameObject>("Explosion"), transform.position, Quaternion.identity);
-        Destroy(explosion, explosion.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-        Destroy(this.gameObject, 1f);
+        //Game Over
+        //Destroy(this.gameObject, 1f);
     }
 
     void Fire(Transform position)
