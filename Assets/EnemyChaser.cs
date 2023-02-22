@@ -28,8 +28,8 @@ public class EnemyChaser : Enemy
 
                     MoveToPlayer();
                     LookAtPlayer();
-                   /*if (DetectObstacle())
-                        state = State.stopMove;*/
+                    /*if (DetectObstacle())
+                         state = State.stopMove;*/
                 }
                 break;
             case State.stopMove:
@@ -52,7 +52,14 @@ public class EnemyChaser : Enemy
         if (collision.gameObject.tag == "Player")
         {
             PlayerController.instance.PlayerTakeDamage(collisionDamage);
-            TakeDamage(10000f);
+            myHealth.RemoveHealth(10000);
+
+            if (myHealth.health <= 0)
+            {
+                GameObject fire = Instantiate(Resources.Load<GameObject>("FireAnimation"), transform.position, transform.rotation, transform);
+                Destroy(fire, 1f);
+                StartCoroutine(WaitForDeath());
+            }
         }
     }
 

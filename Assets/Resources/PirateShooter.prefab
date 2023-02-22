@@ -654,8 +654,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6042594644636128740}
   - component: {fileID: 6042594644636128745}
-  - component: {fileID: 6042594644636128742}
   - component: {fileID: 6042594644636128747}
+  - component: {fileID: 6042594644636128742}
   - component: {fileID: 6042594644636128744}
   m_Layer: 6
   m_Name: PirateShooter
@@ -703,22 +703,6 @@ MonoBehaviour:
   takeDamage: 0
   healAmount: 0
   giveHealth: 0
---- !u!70 &6042594644636128742
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6042594644636128738}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.0032281876, y: 0.030186813}
-  m_Size: {x: 0.33420372, y: 0.9320835}
-  m_Direction: 0
 --- !u!114 &6042594644636128747
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -737,6 +721,8 @@ MonoBehaviour:
   shootDamage: 10
   fireRate: 0.5
   minDistance: 2
+  scoreToAdd: 10
+  fire: 0
   firePositon: {fileID: 7064544664670557624}
   currentPosition: {x: 0, y: 0}
   playerPosition: {x: 0, y: 0}
@@ -744,6 +730,24 @@ MonoBehaviour:
   hitDistance: 2
   state: 0
   triggerDeath: 0
+  damageToDeal: 0
+  dealDamage: 0
+--- !u!70 &6042594644636128742
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6042594644636128738}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.0032281876, y: 0.030186813}
+  m_Size: {x: 0.33420372, y: 0.9320835}
+  m_Direction: 0
 --- !u!50 &6042594644636128744
 Rigidbody2D:
   serializedVersion: 4

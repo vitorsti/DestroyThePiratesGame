@@ -19,4 +19,9 @@ public class DeteriorationAnimationController : MonoBehaviour
     {
         animator.SetFloat("health", healthManager.health);
     }
+
+    public void Reset()
+    {
+        animator.Play("idle");
+    }
 }

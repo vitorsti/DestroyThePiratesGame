@@ -569,12 +569,17 @@ MonoBehaviour:
   shootDamage: 0
   fireRate: 0
   minDistance: 0
+  scoreToAdd: 5
+  fire: 0
   firePositon: {fileID: 0}
   currentPosition: {x: 0, y: 0}
   playerPosition: {x: 0, y: 0}
   raycastPosiotion: {fileID: 5392649768317732485}
   hitDistance: 1
   state: 0
+  triggerDeath: 0
+  damageToDeal: 0
+  dealDamage: 0
 --- !u!70 &119396266524702536
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
     public Transform[] firePositionSides;
     public static PlayerController instance { get; private set; }
     Rigidbody2D rb;
-
+    bool stop;
     // Start is called before the first frame update
     void Awake()
     {
@@ -53,13 +53,14 @@ public class PlayerController : MonoBehaviour
         horizontal *= Time.deltaTime;
         //rotate
         //transform.Rotate(0, 0, -horizontal, Space.World);
+       
         rb.AddTorque(-horizontal, ForceMode2D.Force);
 
     }
     private void Update()
     {
         //Fire projectile front
-        if (Input.GetMouseButtonDown(0) && singleFireEnable)
+        if (Input.GetMouseButtonDown(0) && singleFireEnable )
         {
 
             Fire(firePosition);
@@ -68,7 +69,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //fire projectile side
-        if (Input.GetMouseButtonDown(1) && multipleFireEnable)
+        if (Input.GetMouseButtonDown(1) && multipleFireEnable )
         {
 
             for (int i = 0; i < firePositionSides.Length; i++)
@@ -103,7 +104,7 @@ public class PlayerController : MonoBehaviour
     void PlayerDeath()
     {
         //Game Over
-        //Destroy(this.gameObject, 1f);
+        GameManager.instance.GameOver();
     }
 
     void Fire(Transform position)

@@ -9,13 +9,14 @@ public class EnemyShooter : Enemy
     // Start is called before the first frame update
     void Start()
     {
-        state = State.chase;
+        state = State.start;
+        //state = State.chase;
     }
 
     // Update is called once per frame
     void Update()
     {
-       
+
         float dis = Vector2.Distance(currentPosition, playerPosition);
 
         currentPosition = transform.position;
@@ -23,6 +24,9 @@ public class EnemyShooter : Enemy
 
         switch (state)
         {
+            case State.start:
+                state = State.chase;
+                break;
             case State.chase:
 
                 if (dis > minDistance)
@@ -35,6 +39,7 @@ public class EnemyShooter : Enemy
                 else
                 {
                     state = State.shoot;
+                    fire = true;
                 }
 
                 break;
@@ -57,6 +62,6 @@ public class EnemyShooter : Enemy
                 break;
         }
 
-       
+
     }
 }

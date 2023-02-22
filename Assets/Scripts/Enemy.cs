@@ -13,10 +13,10 @@ public class Enemy : MonoBehaviour
     public float shootDamage;
     public float fireRate;
     public float minDistance;
-
-    bool fire = false;
+    public float scoreToAdd;
+    public bool fire = false;
     public Transform firePositon;
-    HealthManager myHealth;
+    internal HealthManager myHealth;
     [Header("Debug only do not change value")]
     [SerializeField]
     public Vector2 currentPosition;
@@ -28,7 +28,7 @@ public class Enemy : MonoBehaviour
 
     public float hitDistance;
     LayerMask mask;
-    public enum State { none, chase, shoot, avoidObstacle, stopMove };
+    public enum State { none, chase, shoot, avoidObstacle, stopMove,start };
     public State state;
     [Header("----- Debug -----")]
     [SerializeField]
@@ -59,6 +59,7 @@ public class Enemy : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
         mask = LayerMask.GetMask("Obstacles");
+        fire = false;
     }
 
     public virtual void MoveToPlayer()
@@ -87,12 +88,13 @@ public class Enemy : MonoBehaviour
 
 
     }
-    public void TakeDamage(float damageToTake)
+    public virtual void TakeDamage(float damageToTake)
     {
         myHealth.RemoveHealth(damageToTake);
 
         if (myHealth.health <= 0)
         {
+            GameManager.instance.AddScore(scoreToAdd);
             GameObject fire = Instantiate(Resources.Load<GameObject>("FireAnimation"), transform.position, transform.rotation, transform);
             Destroy(fire, 1f);
             StartCoroutine(WaitForDeath());
@@ -120,9 +122,9 @@ public class Enemy : MonoBehaviour
 
         //Destroy(this.gameObject);
     }
-    IEnumerator WaitForDeath()
+    internal IEnumerator WaitForDeath()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.5f);
         EnemyDeath();
     }
     public bool DetectObstacle()

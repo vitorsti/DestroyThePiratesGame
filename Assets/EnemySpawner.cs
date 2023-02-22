@@ -5,26 +5,111 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     public List<GameObject> pool;
-    public List<GameObject> waiting, inAction;
+    [SerializeField]
+    private List<GameObject> waiting, inAction;
     public Transform minTop, maxTop, minDown, maxDown;
     public Transform poolLocation;
     Vector2 positionToSpawn;
     public int instancesLimit = 10;
     float spawnRate;
+    float timer;
     public static EnemySpawner instance;
+    Coroutine spawnCoroutine;
     // Start is called before the first frame update
     void Awake()
     {
         instance = this;
         //instancesLimit = RandomWaveNumber();
-        spawnRate = PlayerPrefs.GetFloat("SpawnRate", 1.5f);
-        GetEnemiesFromPool();
+        //spawnRate = PlayerPrefs.GetFloat("SpawnRate", 1.5f);
+
     }
-    void Start()
+    public void StartSpawn()
     {
-        StartCoroutine(EnableEnemie());
+
+        spawnRate = GameManager.instance.spawnRate;
+        StartCoroutine(StartGame());
     }
 
+    public void Reset()
+    {
+        StopAllCoroutines();
+
+        if (waiting.Count > 0)
+        {
+            for (int i = 0; i < waiting.Count; i++)
+            {
+                pool.Add(waiting[i]);
+            }
+
+            waiting.Clear();
+        }
+
+
+
+        for (int i = 0; i < inAction.Count; i++)
+        {
+            pool.Add(inAction[i]);
+            inAction[i].GetComponent<Collider2D>().enabled = false;
+            inAction[i].GetComponent<Enemy>().enabled = false;
+
+            inAction[i].transform.position = poolLocation.position;
+            inAction[i].transform.rotation = Quaternion.identity;
+            inAction[i].GetComponent<HealthManager>().ResetHealth();
+            inAction[i].GetComponentInChildren<DeteriorationAnimationController>().Reset();
+
+            Debug.Log("passou aqi: " + i);
+        }
+
+        inAction.Clear();
+
+        StartSpawn();
+
+    }
+
+    public void ResetToMenu()
+    {
+        StopAllCoroutines();
+
+        if (waiting.Count > 0)
+        {
+            for (int i = 0; i < waiting.Count; i++)
+            {
+                pool.Add(waiting[i]);
+            }
+
+            waiting.Clear();
+        }
+
+
+
+        for (int i = 0; i < inAction.Count; i++)
+        {
+            pool.Add(inAction[i]);
+            inAction[i].GetComponent<Collider2D>().enabled = false;
+            inAction[i].GetComponent<Enemy>().enabled = false;
+
+            inAction[i].transform.position = poolLocation.position;
+            inAction[i].transform.rotation = Quaternion.identity;
+            inAction[i].GetComponent<HealthManager>().ResetHealth();
+            inAction[i].GetComponentInChildren<DeteriorationAnimationController>().Reset();
+            Debug.Log("passou aqi: " + i);
+        }
+
+        inAction.Clear();
+    }
+    public void StopEnemies()
+    {
+        StopAllCoroutines();
+
+        for (int i = 0; i < inAction.Count; i++)
+        {
+
+            inAction[i].GetComponent<Collider2D>().enabled = false;
+            inAction[i].GetComponent<Enemy>().enabled = false;
+
+            Debug.Log("passou aqi: " + i);
+        }
+    }
     void GetEnemiesFromPool()
     {
         float limit = instancesLimit;
@@ -83,16 +168,25 @@ public class EnemySpawner : MonoBehaviour
 
     void CheckActiveEnemies()
     {
+        timer = GameManager.instance.timer;
         Debug.Log(inAction.Count);
         if (inAction.Count == 0)
         {
-            //Round Over
+            if (timer > 0)
+            {
+                StopAllCoroutines();
+                StartCoroutine(StartGame());
+            }
+            else
+            {
+                StopAllCoroutines();
+            }
         }
     }
 
     IEnumerator EnableEnemie()
     {
-        int index = waiting.Count - 1;
+        int index = waiting.Count-1;
 
         while (index > -1)
         {
@@ -111,5 +205,11 @@ public class EnemySpawner : MonoBehaviour
 
         yield return null;
     }
-
+    IEnumerator StartGame()
+    {
+        GetEnemiesFromPool();
+        yield return new WaitForSeconds(0.1f);
+        StartCoroutine(EnableEnemie());
+        yield return null;
+    }
 }

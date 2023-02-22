@@ -91,7 +91,7 @@ AnimatorStateMachine:
     m_Position: {x: 250, y: 110, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8161496466068997081}
-    m_Position: {x: 420, y: 0, z: 0}
+    m_Position: {x: 500, y: -70, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6266698539365094657}
     m_Position: {x: 640, y: 70, z: 0}
@@ -170,7 +170,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: enemyShooter0
+  m_Name: idle
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
