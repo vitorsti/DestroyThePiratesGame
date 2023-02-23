@@ -151,12 +151,14 @@ public class EnemySpawner : MonoBehaviour
         {
             if (enemie.name == inAction[i].name)
             {
+
                 inAction[i].GetComponent<Collider2D>().enabled = false;
                 inAction[i].GetComponent<Enemy>().enabled = false;
 
                 inAction[i].transform.position = poolLocation.position;
                 inAction[i].transform.rotation = Quaternion.identity;
                 inAction[i].GetComponent<HealthManager>().ResetHealth();
+                inAction[i].SetActive(false);
                 pool.Add(inAction[i]);
                 inAction.Remove(inAction[i]);
 
@@ -195,6 +197,7 @@ public class EnemySpawner : MonoBehaviour
             positionToSpawn = Vector2.zero;
             positionToSpawn = GetLocation();
             waiting[index].transform.position = positionToSpawn;
+            waiting[index].SetActive(true);
             waiting[index].GetComponent<Collider2D>().enabled = true;
             waiting[index].GetComponent<Enemy>().enabled = true;
             inAction.Add(waiting[index]);
