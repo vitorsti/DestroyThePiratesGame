@@ -14,27 +14,28 @@ public class EnemyShooter : Enemy
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-
-        float dis = Vector2.Distance(currentPosition, playerPosition);
-
         currentPosition = transform.position;
         playerPosition = PlayerController.instance.transform.position;
+        float dis = Vector2.Distance(currentPosition, playerPosition);
 
         switch (state)
         {
             case State.start:
+
                 state = State.chase;
                 break;
             case State.chase:
+
+
 
                 if (dis > minDistance)
                 {
                     LookAtPlayer();
                     MoveToPlayer();
-                    /*if (DetectObstacle())
-                        state = State.stopMove;*/
+                    if (DetectObstacle())
+                        state = State.stopMove;
                 }
                 else
                 {
@@ -56,9 +57,10 @@ public class EnemyShooter : Enemy
                 state = State.avoidObstacle;
                 break;
             case State.avoidObstacle:
-                //currentPosition = transform.position;
                 AvoidObstacle();
                 //state = State.chase;
+                break;
+            case State.dead:
                 break;
         }
 

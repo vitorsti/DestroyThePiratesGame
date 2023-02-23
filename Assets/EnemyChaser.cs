@@ -14,22 +14,23 @@ public class EnemyChaser : Enemy
 
     private void FixedUpdate()
     {
-
+        currentPosition = transform.position;
+        playerPosition = PlayerController.instance.transform.position;
+        float dis = Vector2.Distance(currentPosition, playerPosition);
         switch (state)
         {
 
             case State.chase:
-                float dis = Vector2.Distance(currentPosition, playerPosition);
-                //float rotationDistance = dis;
-                currentPosition = transform.position;
-                playerPosition = PlayerController.instance.transform.position;
+
+
+
                 if (dis > minDistance)
                 {
 
                     MoveToPlayer();
                     LookAtPlayer();
-                    /*if (DetectObstacle())
-                         state = State.stopMove;*/
+                    if (DetectObstacle())
+                        state = State.stopMove;
                 }
                 break;
             case State.stopMove:
@@ -43,22 +44,26 @@ public class EnemyChaser : Enemy
                 AvoidObstacle();
                 //state = State.none;
                 break;
-
+            case State.dead:
+                break;
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (state != State.dead)
         {
-            PlayerController.instance.PlayerTakeDamage(collisionDamage);
-            myHealth.RemoveHealth(10000);
-
-            if (myHealth.health <= 0)
+            if (collision.gameObject.tag == "Player")
             {
-                GameObject fire = Instantiate(Resources.Load<GameObject>("FireAnimation"), transform.position, transform.rotation, transform);
-                Destroy(fire, 1f);
-                StartCoroutine(WaitForDeath());
+                PlayerController.instance.PlayerTakeDamage(collisionDamage);
+                myHealth.RemoveHealth(10000);
+
+                if (myHealth.health <= 0)
+                {
+                    GameObject fire = Instantiate(Resources.Load<GameObject>("FireAnimation"), transform.position, transform.rotation, transform);
+                    Destroy(fire, 1f);
+                    StartCoroutine(WaitForDeath());
+                }
             }
         }
     }

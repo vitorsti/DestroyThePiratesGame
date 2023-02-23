@@ -85,6 +85,7 @@ public class GameManager : MonoBehaviour
         //Time.timeScale = 1;
         EnemySpawner.instance.Reset();
         PlayerController.instance.GetComponent<HealthManager>().ResetHealth();
+        PlayerController.instance.GetComponentInChildren<DeteriorationAnimationController>().Reset();
         gameOverScreen.SetActive(false);
         spawnRate = PlayerPrefs.GetFloat("SpawnRate", 1.5f);
         ResetTimer();
