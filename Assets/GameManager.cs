@@ -48,9 +48,11 @@ public class GameManager : MonoBehaviour
             timerText.text = niceTime;
             if (timer <= 0)
             {
+                timerText.text = "00:00";
                 timer = 0;
                 GameWin();
             }
+
         }
     }
 
@@ -63,6 +65,7 @@ public class GameManager : MonoBehaviour
         PlayerController.instance.enabled = true;
         PlayerController.instance.gameObject.transform.position = Vector2.zero;
         PlayerController.instance.GetComponent<HealthManager>().ResetHealth();
+        playerController.enabled = true;
         startTimer = true;
     }
 
@@ -129,22 +132,25 @@ public class GameManager : MonoBehaviour
 
     public void MainMenu()
     {
-        //Time.timeScale = 1;
+        Time.timeScale = 1;
+       
         EnemySpawner.instance.ResetToMenu();
         PlayerController.instance.GetComponent<HealthManager>().ResetHealth();
         PlayerController.instance.GetComponentInChildren<DeteriorationAnimationController>().Reset();
         PlayerController.instance.gameObject.transform.position = Vector2.zero;
+        playerController.enabled = false; 
+        DestroyAllCannonBals();
     }
 
     public void DestroyAllCannonBals()
     {
         ProjectileBehavior[] projectile = FindObjectsOfType<ProjectileBehavior>();
-
+        Debug.Log(projectile.Length);
         if (projectile.Length > 0)
         {
-            foreach (ProjectileBehavior i in projectile)
+            for (int i = 0; i < projectile.Length; i++)
             {
-                Destroy(i);
+                Destroy(projectile[i].gameObject);
             }
         }
     }
@@ -193,7 +199,15 @@ public class GameManager : MonoBehaviour
         else
             return;
     }
+    public void Pause()
+    {
+        Time.timeScale = 0;
+    }
 
+    public void UnPause()
+    {
+        Time.timeScale = 1;
+    }
     public void ConfigurationScreen()
     {
         setSpawnRateText.text = "Enemy Spawn Rate : " + PlayerPrefs.GetFloat("SpawnRate", 5f) + "s";
